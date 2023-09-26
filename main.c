@@ -60,7 +60,7 @@ void create_db(){
         sqlite3_free(zErrMsg);
     } else {
         fprintf(stdout, "\nTable has successfully created.\n");}
-free(dPath);
+free(dpath);
 }
 
 void close_db() {
