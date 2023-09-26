@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sqlite3.h>
+#include <unistd.h>
 
 sqlite3 *db;
 GError *error = NULL;
@@ -152,8 +153,8 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
     GtkListStore *liststore;
     GtkTreeModel *model;
 
-    char *command;
-    asprintf(&command, "rm %s/%s", DB_DIR, "books.db");
+    char *dbPath;
+    asprintf(&dbPath, "%s/%s", DB_DIR, "books.db");
 
     // Gets the current model link to the GtkTreeView
     model = gtk_tree_view_get_model(treeview);
@@ -163,10 +164,12 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
         liststore = GTK_LIST_STORE(model);
         gtk_list_store_clear(liststore);
     }
-    system(command);
+    if (unlink(dbPath) == -1) {
+        perror("Error trying to remove database file");
+     }
     close_db();
     create_db();
-    free(command);
+    free(dbPath);
 }
 
 /* Stop the GTK+ main loop function when the window is destroyed. */
