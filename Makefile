@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS= -Wall `pkg-config --cflags gtk+-3.0`
 LDFLAGS= -lm -lsqlite3 `pkg-config --libs gtk+-3.0`
-DB_DIR=$(HOME)/.books_list
+DB_DIR=/var/lib/books_list
 
 all: books_list
 
