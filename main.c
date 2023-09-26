@@ -184,7 +184,7 @@ return FALSE;
 
 void add_fig(GtkWidget *window){
     char *dbPath;
-    asprintf(&dbPath, "%s/%s", DB_DIR, "books.png");
+    asprintf(&dbPath, "%s/%s", fig_DIR, "books.png");
     if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), dbPath, &error)) {
         g_error("Error loading icone: %s", error->message);
     }
