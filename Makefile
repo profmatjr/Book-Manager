@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall `pkg-config --cflags gtk+-3.0`
+CFLAGS= -Wall -Wextra -g  -lm -lsqlite3 `pkg-config --cflags gtk+-3.0`  `pkg-config --libs gtk+-3.0`
 LIBS=`pkg-config --libs gtk+-3.0`
 DB_DIR=/var/lib/books_list
 
