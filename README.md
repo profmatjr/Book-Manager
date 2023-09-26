@@ -16,7 +16,7 @@ This is a C program with GTK interface for for storing books data like title, au
 Clone the repository and navigate into the project directory, build and install:
 
 ```bash
-git clone https://github.com/profmatjr/books_list.git
+git clone https://github.com/profmatjr/Book-Manager.git
 cd books_list
 make
 sudo make install
