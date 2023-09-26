@@ -1,6 +1,5 @@
 # Book-Manager
 A book cataloger program
-# Book Manager
 
 ## ABOUT
 
@@ -24,7 +23,7 @@ sudo make install
 
 ```
 
-##That's it!!!
+That's it!!!
 
 
 
