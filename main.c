@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,7 +6,8 @@
 #include <sqlite3.h>
 
 sqlite3 *db;
-GError *error = NULL; 
+GError *error = NULL;
+const char *dbPath, *figPath;
 
  typedef struct {
     GtkEntry *entry_titulo;
@@ -33,8 +35,11 @@ void create_db(){
     char *zErrMsg = 0;
     int rc;
 
+    char *dbPath;
+    asprintf(&dbPath, "%s/%s", DB_DIR, "books.db");
+
     // Open or creat a SQlite database
-    rc = sqlite3_open("~/.books_list/books.db", &db);
+    rc = sqlite3_open(dbPath, &db);
     if (rc) {
         fprintf(stderr, "\nError opennig database: %s\n", sqlite3_errmsg(db));}
     else {
@@ -55,6 +60,7 @@ void create_db(){
         sqlite3_free(zErrMsg);
     } else {
         fprintf(stdout, "\nTable has successfully created.\n");}
+free(dPath);
 }
 
 void close_db() {
@@ -148,6 +154,9 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
     GtkListStore *liststore;
     GtkTreeModel *model;
 
+    char *command;
+    asprintf(&command, "rm %s/%s", DB_DIR, "books.db");
+
     // Gets the current model link to the GtkTreeView
     model = gtk_tree_view_get_model(treeview);
 
@@ -156,9 +165,10 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
         liststore = GTK_LIST_STORE(model);
         gtk_list_store_clear(liststore);
     }
-    system("rm ~/.books_list/books.db");
+    system(command);
     close_db();
     create_db();
+    free(command);
 }
 
 /* Stop the GTK+ main loop function when the window is destroyed. */
@@ -172,11 +182,13 @@ return FALSE;
 }
 
 void add_fig(GtkWidget *window){
-
-    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), "~/.books_list/books.png", &error)) {
+    char *dbPath;
+    asprintf(&dbPath, "%s/%s", DB_DIR, "books.png");
+    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), dbPath, &error)) {
         g_error("Error loading icone: %s", error->message);
     }
     return;
+free(dbPath);
 }
 
 int main(int argc, char *argv[]) {
