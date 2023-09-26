@@ -156,7 +156,7 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
         liststore = GTK_LIST_STORE(model);
         gtk_list_store_clear(liststore);
     }
-    system("rm var/lib/books_list/books.db");
+    system("rm /var/lib/books_list/books.db");
     close_db();
     create_db();
 }
