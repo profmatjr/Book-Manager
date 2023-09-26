@@ -1,7 +1,12 @@
 CC=gcc
 CFLAGS= -Wall `pkg-config --cflags gtk+-3.0`
 LDFLAGS= -lm -lsqlite3 `pkg-config --libs gtk+-3.0`
-DB_DIR=/var/lib/books_list
+
+ifeq ($(HOME),/root)
+DB_DIR=/home/$(SUDO_USER)/.books_list
+else
+DB_DIR=$(HOME)/.books_list
+endif
 
 all: books_list
 
@@ -15,7 +20,7 @@ install:
 	install -m 755 books_list /usr/local/bin/
 	install -m 644 books_list.desktop /usr/share/applications/
 	install -m 644 Figures/books_list_icon.png /usr/share/icons/hicolor/48x48/apps/
-	mkdir -p $(DB_DIR)
+	install -d $(DB_DIR)
 	install -m 644 Figures/books.png $(DB_DIR)
 
 clean:
