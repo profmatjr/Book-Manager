@@ -1,9 +1,9 @@
 CC=gcc
 
 ifeq ($(HOME),/root)
-DB_DIR=/home/$(SUDO_USER)/Book-Manager
+DB_DIR=/home/$(SUDO_USER)/Documents/Book-Manager
 else
-DB_DIR=$(HOME)/Book-Manager
+DB_DIR=$(HOME)/Documents/Book-Manager
 endif
 
 ifeq ($(HOME),/root)
