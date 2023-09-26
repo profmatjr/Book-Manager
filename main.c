@@ -34,7 +34,7 @@ void create_db(){
     int rc;
 
     // Open or creat a SQlite database
-    rc = sqlite3_open("/var/lib/books_list/books.db", &db);
+    rc = sqlite3_open("~/.books_list/books.db", &db);
     if (rc) {
         fprintf(stderr, "\nError opennig database: %s\n", sqlite3_errmsg(db));}
     else {
@@ -156,7 +156,7 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
         liststore = GTK_LIST_STORE(model);
         gtk_list_store_clear(liststore);
     }
-    system("rm books.db");
+    system("rm ~/.books_list/books.db");
     close_db();
     create_db();
 }
@@ -173,7 +173,7 @@ return FALSE;
 
 void add_fig(GtkWidget *window){
 
-    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), "Figures/books.png", &error)) {
+    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), "~/.books_list/books.png", &error)) {
         g_error("Error loading icone: %s", error->message);
     }
     return;
