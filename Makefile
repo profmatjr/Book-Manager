@@ -1,12 +1,13 @@
 CC=gcc
-CFLAGS= -Wall `pkg-config --cflags gtk+-3.0`
-LDFLAGS= -lm -lsqlite3 `pkg-config --libs gtk+-3.0`
 
 ifeq ($(HOME),/root)
 DB_DIR=/home/$(SUDO_USER)/.books_list
 else
 DB_DIR=$(HOME)/.books_list
 endif
+
+CFLAGS= -Wall `pkg-config --cflags gtk+-3.0` -DDB_DIR='\"$(DB_DIR)\"
+LDFLAGS= -lm -lsqlite3 `pkg-config --libs gtk+-3.0`
 
 all: books_list
 
