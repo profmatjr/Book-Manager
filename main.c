@@ -173,7 +173,7 @@ return FALSE;
 
 void add_fig(GtkWidget *window){
 
-    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), "var/lib/books_list/books.png", &error)) {
+    if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), "/var/lib/books_list/books.png", &error)) {
         g_error("Error loading icone: %s", error->message);
     }
     return;
