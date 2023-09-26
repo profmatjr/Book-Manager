@@ -6,7 +6,7 @@ else
 DB_DIR=$(HOME)/.books_list
 endif
 
-CFLAGS= -Wall `pkg-config --cflags gtk+-3.0` -DDB_DIR='\"$(DB_DIR)\"
+CFLAGS= -Wall `pkg-config --cflags gtk+-3.0` -DDB_DIR=\"$(DB_DIR)\"
 LDFLAGS= -lm -lsqlite3 `pkg-config --libs gtk+-3.0`
 
 all: books_list
