@@ -33,7 +33,7 @@ void create_db(){
 	
     char *zErrMsg = 0;
     int rc;
-    const char *dbPath;	
+    char *dbPath;	
     asprintf(&dbPath, "%s/%s", DB_DIR, "books.db");
 
     // Open or creat a SQlite database
@@ -58,7 +58,7 @@ void create_db(){
         sqlite3_free(zErrMsg);
     } else {
         fprintf(stdout, "\nTable has successfully created.\n");}
-free(dpath);
+free(dbPath);
 }
 
 void close_db() {
@@ -152,7 +152,7 @@ void delete_books(GtkButton *button, GtkTreeView *treeview) {
     GtkListStore *liststore;
     GtkTreeModel *model;
 
-    const char *command;
+    char *command;
     asprintf(&command, "rm %s/%s", DB_DIR, "books.db");
 
     // Gets the current model link to the GtkTreeView
@@ -180,7 +180,7 @@ return FALSE;
 }
 
 void add_fig(GtkWidget *window){
-    const char *dbPath;
+    char *dbPath;
     asprintf(&dbPath, "%s/%s", DB_DIR, "books.png");
     if (!gtk_window_set_icon_from_file (GTK_WINDOW(window), dbPath, &error)) {
         g_error("Error loading icone: %s", error->message);
